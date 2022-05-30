@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:css_filter/css_filter_util.dart';
+import 'package:css_filter/src/util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:css_filter/css_filter.dart';
 
 void main() {
-  group('[css_filter_util Tests]', () {
+  group('[util Tests]', () {
     test('baseMatrix', () {
       expect(baseMatrix().length, 25);
     });
@@ -48,7 +48,7 @@ void main() {
     });
   });
 
-  group('[css_filter FilterMatrix Tests]', () {
+  group('[FilterMatrix Tests]', () {
     final matrix = baseMatrix();
     final matrix1 = baseMatrix();
     test('FilterMatrix.contrast', () {
@@ -106,9 +106,15 @@ void main() {
       expect(listEquals(saturate1, matrix), true);
     });
 
+    test('FilterMatrix.opacity', () {
+      List<double> opacity1 = FilterMatrix.opacity(matrix: matrix, value: 1.0);
+
+      expect(listEquals(opacity1, matrix), true);
+    });
+
   });
 
-  group('[css_filter CSSFilter Tests]', () {
+  group('[CSSFilter Tests]', () {
     Widget testWidget = const Text('Hello world');
     test('baseMatrix', () {
       expect(baseMatrix().length, 25);
@@ -220,6 +226,20 @@ void main() {
       Widget blur3 = CSSFilter.blur(child: testWidget, value: 1.0);
 
       expect(blur3 is ImageFiltered, true);
+    });
+
+    test('CSSFilter.opacity', () {
+      Widget opacity1 = CSSFilter.opacity(child: testWidget, value: 1.0);
+      
+      expect(opacity1, testWidget);
+
+      Widget opacity2 = CSSFilter.opacity(child: testWidget, value: -1.0);
+
+      expect(opacity2, testWidget);
+
+      Widget opacity3 = CSSFilter.opacity(child: testWidget, value: 0.5);
+
+      expect(opacity3 is ColorFiltered, true);
     });
     
     test('CSSFilter.apply use default values', () {

@@ -7,7 +7,7 @@ import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import './css_filter_util.dart';
+import 'src/util.dart';
 
 class FilterMatrix {
   /// Check: https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/contrast()
@@ -98,11 +98,19 @@ class FilterMatrix {
   static saturate({ required List<double> matrix, required double value }) {
     return FilterMatrix.grayscale(matrix: matrix, value: 1.0 - value);
   }
+  static opacity({ required List<double> matrix, required double value }) {
+    return multiplyMatrix5(matrix, <double>[
+      1, 0, 0, 0, 0,
+      0, 1, 0, 0, 0,
+      0, 0, 1, 0, 0,
+      0, 0, 0, value, 0,
+      0, 0, 0, 0, 1
+    ]);
+  }
 }
 
-/// Use CSS filter effects on flutter's Widget. All CSS filters are implemented except `drop-shadow()` and `opacity()`.
-/// `drop-shadow()` should be replaced by the [BoxShadow](https://api.flutter.dev/flutter/painting/BoxShadow-class.html) or [Shadow](https://api.flutter.dev/flutter/dart-ui/Shadow-class.html) widget,
-///  and `opacity()` should be replaced by the [Opacity](https://api.flutter.dev/flutter/widgets/Opacity-class.html) widget.
+/// Use CSS filter effects on flutter's Widget. All CSS filters are implemented except `drop-shadow()`.
+/// `drop-shadow()` should be replaced by the [BoxShadow](https://api.flutter.dev/flutter/painting/BoxShadow-class.html) or [Shadow](https://api.flutter.dev/flutter/dart-ui/Shadow-class.html) widget.
 /// 
 /// Support methods:
 /// * contrast()
@@ -113,6 +121,7 @@ class FilterMatrix {
 /// * saturate()
 /// * invert()
 /// * blur()
+/// * opacity()
 class CSSFilter {
   /// Adjusts the contrast of the input Widget. 
   /// A value under 1.0 decreases the contrast, while a value over 1.0 increases it. 
@@ -186,6 +195,15 @@ class CSSFilter {
 
     return ImageFiltered(imageFilter: ImageFilter.blur(sigmaX: value, sigmaY: value), child: child);
   }
+  /// Apply transparency to input Widget.
+  /// Values between 0.0 and 1.0 are linear multipliers on the effect.
+  /// A value of 0.0 is completely transparent.
+  /// Default value is 1.0.
+  static Widget opacity({ required Widget child, required double value }) {
+    if (!isNotDefault(value)) return child;
+
+    return execFilterSample(FilterMatrix.opacity(matrix: baseMatrix(), value: value), child);
+  }
   /// A quick and efficient way to apply multiple filters to the input Widget.
   /// You can use any combination of these filter effects. 
   /// 
@@ -205,7 +223,8 @@ class CSSFilter {
     double brightness = 1.0,
     double saturate = 1.0,
     double invert = 0.0,
-    double blur = 0.0
+    double blur = 0.0,
+    double opacity = 1.0
   }) {
     List<double> matrix = baseMatrix();
     
@@ -215,6 +234,7 @@ class CSSFilter {
     if (hueRotate != 0.0) matrix = FilterMatrix.hue(matrix: matrix, value: hueRotate);
     if (isNotDefault(brightness)) matrix = FilterMatrix.brightness(matrix: matrix, value: brightness);
     if (isNotDefault(saturate)) matrix = FilterMatrix.saturate(matrix: matrix, value: saturate);
+    if (isNotDefault(opacity)) matrix = FilterMatrix.opacity(matrix: matrix, value: opacity);
 
     Widget tree = ColorFiltered(
       colorFilter: toColorFilterMatrix(matrix),

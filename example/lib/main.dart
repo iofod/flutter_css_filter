@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: CSSFilter.saturate(value: 1.1, child: Container(
+          child: CSSFilter.saturate(value: 1.2, child: Container(
               padding: const EdgeInsets.all(16.0),
               width: MediaQuery.of(context).size.width,
               child: Wrap(
@@ -90,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   CSSFilter.saturate(child: pic('saturate(2.0)'), value: 2.0),
                   CSSFilter.invert(child: pic('invert(0.9)'), value: 0.9),
                   CSSFilter.blur(child: pic('blur(1.5)'), value: 1.5),
+                  CSSFilter.opacity(child: pic('opacity(0.5)'), value: 0.5),
                   CSSFilter.apply(
                       child: pic('contrast(1.5),sepia(0.2)'),
                       contrast: 1.3,
@@ -104,6 +105,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       brightness: 1.2,
                       saturate: 0.8,
                       hueRotate: 20.0),
+                  CSSFilter.apply(
+                      child: pic(
+                          'contrast(1.2),sepia(0.8),hueRotate(90.0),invert(0.9),opacity(0.9)'),
+                      contrast: 1.2,
+                      sepia: 0.8,
+                      hueRotate: 90.0,
+                      invert: 0.9,
+                      opacity: 0.9),
                 ],
               )))),
     );

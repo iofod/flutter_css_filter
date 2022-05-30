@@ -9,5 +9,12 @@
 ## 0.5.0
 
 * add unit test.
-* Update docs.
+* update docs.
 * fixed isNotDefault.
+
+## 0.9.0
+
+* add opacity.
+* update test.
+* update example.
+* add CI

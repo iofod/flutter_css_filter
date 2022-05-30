@@ -128,7 +128,7 @@ class CSSFilter {
   /// A value of 1.0 is completely grayscale.
   /// Default value is 0.0.
   static Widget grayscale({ required Widget child, required double value }) {
-    if (!isPositive(value)) return child;
+    if (!isNotNegative(value)) return child;
 
     return execFilterSample(FilterMatrix.grayscale(matrix: baseMatrix(), value: value), child);
   }
@@ -137,7 +137,7 @@ class CSSFilter {
   /// A value of 1.0 is completely sepia.
   /// Default value is 0.0.
   static Widget sepia({ required Widget child, required double value }) {
-    if (!isPositive(value)) return child;
+    if (!isNotNegative(value)) return child;
 
     return execFilterSample(FilterMatrix.sepia(matrix: baseMatrix(), value: value), child);
   }
@@ -173,7 +173,7 @@ class CSSFilter {
   /// A value of 1.0 is completely inverted.
   /// Default value is 0.0.
   static Widget invert({ required Widget child, required double value }) {
-    if (!isPositive(value)) return child;
+    if (!isNotNegative(value)) return child;
 
     return execFilterSample(FilterMatrix.invert(matrix: baseMatrix(), value: value), child);
   }
@@ -182,7 +182,7 @@ class CSSFilter {
   /// @parmas value: A value of blur radius.
   /// Default value is 0.0.
   static Widget blur({ required Widget child, required double value }) {
-    if (!isPositive(value)) return child;
+    if (!isNotNegative(value)) return child;
 
     return ImageFiltered(imageFilter: ImageFilter.blur(sigmaX: value, sigmaY: value), child: child);
   }
@@ -210,8 +210,8 @@ class CSSFilter {
     List<double> matrix = baseMatrix();
     
     if (isNotDefault(contrast)) matrix = FilterMatrix.contrast(matrix: matrix, value: contrast);
-    if (isPositive(grayscale)) matrix = FilterMatrix.grayscale(matrix: matrix, value: grayscale);
-    if (isPositive(sepia)) matrix = FilterMatrix.sepia(matrix: matrix, value: sepia);
+    if (isNotNegative(grayscale)) matrix = FilterMatrix.grayscale(matrix: matrix, value: grayscale);
+    if (isNotNegative(sepia)) matrix = FilterMatrix.sepia(matrix: matrix, value: sepia);
     if (hueRotate != 0.0) matrix = FilterMatrix.hue(matrix: matrix, value: hueRotate);
     if (isNotDefault(brightness)) matrix = FilterMatrix.brightness(matrix: matrix, value: brightness);
     if (isNotDefault(saturate)) matrix = FilterMatrix.saturate(matrix: matrix, value: saturate);

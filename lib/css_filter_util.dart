@@ -110,10 +110,10 @@ Widget execFilterSample(matrix, child) {
   return ColorFiltered(colorFilter: toColorFilterMatrix(matrix), child: child);
 }
 
-bool isPositive(double v) {
+bool isNotNegative(double v) {
   return v > 0.0;
 }
 
 bool isNotDefault(double v) {
-  return v != 1.0 && isPositive(v);
+  return v != 1.0 && v >= 0.0;
 }

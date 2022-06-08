@@ -1,6 +1,6 @@
 name: css_filter
 description: CSS filter for flutter
-version: 0.9.0
+version: 1.0.0
 homepage: https://github.com/iofod/flutter_css_filter
 
 environment:

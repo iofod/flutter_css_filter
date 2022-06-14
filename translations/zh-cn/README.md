@@ -1,26 +1,24 @@
 # CSS Filter for Flutter
 
-English | [简体中文](./translations/zh-cn/README.md)
-
-Use CSS filter effects on Flutter.
+在 Flutter 上使用 CSS 滤镜效果。
 
 [![Version](https://img.shields.io/github/v/release/iofod/flutter_css_filter?label=version)](https://pub.dev/packages/css_filter)
 [![Build Status](https://github.com/iofod/flutter_css_filter/workflows/build/badge.svg)](https://github.com/iofod/flutter_css_filter/actions)
 
-[IFstruct parser](https://github.com/iofod/IFstruct-parser) supports generating flutter code from [iofod](https://www.iofod.com/) visually edited projects. We have separated its filter module code and added many preset effects to form the current CSS Filter for Flutter, which facilitates all flutter projects to use the excellent design of the Web: [CSS filter](https://developer.mozilla.org/en-US/docs/Web/CSS/filter).
+[IFstruct parser](https://github.com/iofod/IFstruct-parser) 支持从 [iofod](https://www.iofod.com/) 可视化编辑的项目生成 Flutter 代码。我们将其滤镜模块代码分离，并添加了许多预设效果，形成了现在的工具库，方便了所有 Flutter 项目使用 Web 的优秀设计：[CSS 滤镜](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter)。
 
-## Features
+## 特色
 
-- Simple and efficient
-- Support multiple filter effects overlay
-- Rich preset effects.
-- Full platform support
-- Customize your own effect
+- 简洁高效的 API
+- 支持多滤镜叠加
+- 丰富的预设
+- 全平台支持
+- 自定义效果
 - Null-safety
 
-## Getting started
+## 起步
 
-After importing the dependent, you can use the basic filters through `CSSFilter`.
+导入依赖后，可以通过`CSSFilter`使用基本滤镜。
 
 ```dart
 import 'package:css_filter/css_filter.dart';
@@ -28,7 +26,7 @@ import 'package:css_filter/css_filter.dart';
 CSSFilter.contrast(child: const Text('foo'), value: 1.2);
 ```
 
-Support filters:
+支持的基础滤镜如下：
 
 - contrast()
 - grayscale()
@@ -40,7 +38,7 @@ Support filters:
 - blur()
 - opacity()
 
-You can combine and overlay these filters in flutter just as you would with a CSS filter. Use `CSSFilter.apply` in conjunction with `CSSFilterMatrix()`. Such as:
+你可以像使用 CSS 滤镜一样在 Flutter 中组合叠加使用这些滤镜。将 `CSSFilter.apply` 与 `CSSFilterMatrix()` 结合使用。如：
 
 ```dart
 CSSFilter.apply(
@@ -49,21 +47,15 @@ CSSFilter.apply(
 );
 ```
 
-**Note:** the order of the chain calls represents the order in which the filters are applied, and the order in which the filter effects are applied affects the final result.
+**注意：** 链式调用的顺序代表了滤镜的应用顺序，应用顺序会影响最终的结果。
 
-## Use presets
+## 使用预设
 
-The [CSSgram](https://github.com/una/CSSgram) project does an excellent job of providing the CSS world with Instagram-like filters, and [instagram.css](https://github.com/picturepan2/instagram.css) complements it with more types of filters. We've combined these two libraries to encapsulate several presets that can call through `CSSFilterPresets`.
+[CSSgram](https://github.com/una/CSSgram) 项目十分牛逼，给 CSS 世界带来了类 Instagram 滤镜，[instagram.css](https://github.com/picturepan2/instagram.css) 对其补充了更多滤镜效果。我们将这两个库结合起来封装了一系列预设，可以通过 `CSSFilterPresets` 调用。
 
-```dart
-import 'package:css_filter/css_filter.dart';
+支持的预设效果和预览：
 
-CSSFilterPresets.insXpro2(child: const Text('Your widget'));
-```
-
-Support effects:
-
-| Effect name | Preview effect | Sample code |
+| 预设 | 预览 | 示例代码 |
 | :----: | :----: | :----: |
 | origin | ![origin](https://raw.githubusercontent.com/iofod/flutter_css_filter/main/assets/origin.jpg) | `CSSFilterPresets.origin(child: Image(...))` |
 | ins1977 | ![ins1977](https://raw.githubusercontent.com/iofod/flutter_css_filter/main/assets/ins1977.jpg) | `CSSFilterPresets.ins1977(child: Image(...))` |
@@ -110,10 +102,10 @@ Support effects:
 | insWillow | ![insWillow](https://raw.githubusercontent.com/iofod/flutter_css_filter/main/assets/insWillow.jpg) | `CSSFilterPresets.insWillow(child: Image(...))` |
 | insXpro2 | ![insXpro2](https://raw.githubusercontent.com/iofod/flutter_css_filter/main/assets/insXpro2.jpg) | `CSSFilterPresets.insXpro2(child: Image(...))` |
 
-Similar to `CSSFilter`, we provide the `apply` method for `CSSFilterPresets` to invoke presets consistently, and apply additionally supports setting the intensity of the filter effect used. To do so:
+与 `CSSFilter` 类似，我们为 `CSSFilterPresets` 提供了 `apply` 方法来统一调用预设，apply 还支持设置滤镜的强度。比如：
 
 ```dart
-/// You can replace the value parameter with any of the supported effects.
+/// 可以将 value 参数替换为任何支持的效果。
 CSSFilterPresets.apply(
   child: YourWidget,
   value: CSSFilterPresets.insNashville, 
@@ -121,9 +113,9 @@ CSSFilterPresets.apply(
 );
 ```
 
-## Customize your own filter preset
+## 自定义滤镜预设
 
-`CSSFilter` provides the most basic filters, `CSSFilterPresets` collects the commonly used combinations of basic filters as presets, meaning you can also customize your own filter presets based on the basic filters.
+`CSSFilter`提供了最基本的滤镜，`CSSFilterPresets`收集了常用的滤镜组合作为预设，也就是说你也可以根据基本滤镜来自定义滤镜预设。
 
 ```dart
 
@@ -134,17 +126,17 @@ customPreset({ required Widget child }) {
   );
 }
 
-/// Used by CSSFilterPresets to set the intensity of the effect.
+/// 利用 CSSFilterPresets 设置效果的强度。
 CSSFilterPresets.apply(
   child: YourWidget,
   value: customPreset,
   strength: 0.9
 );
 
-/// It also supports direct use.
+/// 也支持直接调用。
 customPreset(child: YourWidget);
 ```
 
-## More examples
+## 更多示例
 
-For more usage examples, please check out the [example project](https://github.com/iofod/flutter_css_filter/tree/main/example).
+更多使用示例，请查看 [example](https://github.com/iofod/flutter_css_filter/tree/main/example)

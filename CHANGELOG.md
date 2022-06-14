@@ -25,3 +25,8 @@
 * update docs.
 * support for custom preset.
 * optimize the code structure.
+
+## 1.0.1
+
+* add i18n docs.
+* format code.

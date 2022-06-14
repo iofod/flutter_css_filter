@@ -33,7 +33,8 @@ void main() {
     test('execFilterSample and toColorFilterMatrix', () {
       final matrix = baseMatrix();
 
-      expect(execFilterSample(matrix, const Text('foo')) is ColorFiltered, true);
+      expect(
+          execFilterSample(matrix, const Text('foo')) is ColorFiltered, true);
     });
 
     test('multiplyMatrix5', () {
@@ -50,7 +51,8 @@ void main() {
     });
 
     test('execShaderDirectSample', () {
-      final shaderCallback = execShaderDirectSample(Colors.black, Alignment.center);
+      final shaderCallback =
+          execShaderDirectSample(Colors.black, Alignment.center);
       final shader = shaderCallback(rect1);
 
       expect(shaderCallback is Function, true);
@@ -58,7 +60,8 @@ void main() {
     });
 
     test('execShaderLinearSample', () {
-      final shaderCallback = execShaderLinearSample([Colors.black, Colors.black], Alignment.center, [0.1, 0.9]);
+      final shaderCallback = execShaderLinearSample(
+          [Colors.black, Colors.black], Alignment.center, [0.1, 0.9]);
       final shader = shaderCallback(rect1);
 
       expect(shaderCallback is Function, true);
@@ -66,7 +69,8 @@ void main() {
     });
 
     test('execShaderRadialSample', () {
-      final shaderCallback = execShaderRadialSample([Colors.black, Colors.black], [0.1, 0.9], 0.5);
+      final shaderCallback =
+          execShaderRadialSample([Colors.black, Colors.black], [0.1, 0.9], 0.5);
       final shader = shaderCallback(rect1);
 
       expect(shaderCallback is Function, true);
@@ -82,7 +86,16 @@ void main() {
     });
 
     test('CSSFilterMatrix this', () {
-      final eg = CSSFilterMatrix().contrast().grayscale().sepia().hueRotate().brightness().saturate().invert().blur().opacity();
+      final eg = CSSFilterMatrix()
+          .contrast()
+          .grayscale()
+          .sepia()
+          .hueRotate()
+          .brightness()
+          .saturate()
+          .invert()
+          .blur()
+          .opacity();
 
       expect(eg is CSSFilterMatrix, true);
     });
@@ -99,14 +112,17 @@ void main() {
     final matrix = baseMatrix();
     final matrix1 = baseMatrix();
     test('FilterMatrix.contrast', () {
-      List<double> contrast1 = FilterMatrix.contrast(matrix: matrix, value: 2.0);
-      List<double> contrast2 = FilterMatrix.contrast(matrix: contrast1, value: 0.5);
+      List<double> contrast1 =
+          FilterMatrix.contrast(matrix: matrix, value: 2.0);
+      List<double> contrast2 =
+          FilterMatrix.contrast(matrix: contrast1, value: 0.5);
 
       expect(listEquals(contrast2, matrix), true);
     });
 
     test('FilterMatrix.grayscale', () {
-      List<double> grayscale1 = FilterMatrix.grayscale(matrix: matrix, value: 0.0);
+      List<double> grayscale1 =
+          FilterMatrix.grayscale(matrix: matrix, value: 0.0);
 
       expect(listEquals(grayscale1, matrix), true);
     });
@@ -142,13 +158,15 @@ void main() {
     });
 
     test('FilterMatrix.brightness', () {
-      List<double> saturate1 = FilterMatrix.saturate(matrix: matrix, value: 1.0);
+      List<double> saturate1 =
+          FilterMatrix.saturate(matrix: matrix, value: 1.0);
 
       expect(listEquals(saturate1, matrix), true);
     });
 
     test('FilterMatrix.saturate', () {
-      List<double> saturate1 = FilterMatrix.saturate(matrix: matrix, value: 1.0);
+      List<double> saturate1 =
+          FilterMatrix.saturate(matrix: matrix, value: 1.0);
 
       expect(listEquals(saturate1, matrix), true);
     });
@@ -158,7 +176,6 @@ void main() {
 
       expect(listEquals(opacity1, matrix), true);
     });
-
   });
 
   group('[CSSFilter Tests]', () {
@@ -166,7 +183,7 @@ void main() {
 
     test('CSSFilter.contrast', () {
       Widget contrast1 = CSSFilter.contrast(child: testWidget, value: 1.0);
-      
+
       expect(contrast1, testWidget);
 
       Widget contrast2 = CSSFilter.contrast(child: testWidget, value: -1.0);
@@ -180,7 +197,7 @@ void main() {
 
     test('CSSFilter.grayscale', () {
       Widget grayscale1 = CSSFilter.grayscale(child: testWidget, value: 0.0);
-      
+
       expect(grayscale1, testWidget);
 
       Widget grayscale2 = CSSFilter.grayscale(child: testWidget, value: -1.0);
@@ -194,7 +211,7 @@ void main() {
 
     test('CSSFilter.sepia', () {
       Widget sepia1 = CSSFilter.sepia(child: testWidget, value: 0.0);
-      
+
       expect(sepia1, testWidget);
 
       Widget sepia2 = CSSFilter.sepia(child: testWidget, value: -1.0);
@@ -208,7 +225,7 @@ void main() {
 
     test('CSSFilter.hueRotate', () {
       Widget hueRotate1 = CSSFilter.hueRotate(child: testWidget, value: 0.0);
-      
+
       expect(hueRotate1, testWidget);
 
       Widget sepia2 = CSSFilter.hueRotate(child: testWidget, value: 90.0);
@@ -218,7 +235,7 @@ void main() {
 
     test('CSSFilter.brightness', () {
       Widget brightness1 = CSSFilter.brightness(child: testWidget, value: 1.0);
-      
+
       expect(brightness1, testWidget);
 
       Widget brightness2 = CSSFilter.brightness(child: testWidget, value: -1.0);
@@ -232,7 +249,7 @@ void main() {
 
     test('CSSFilter.saturate', () {
       Widget saturate1 = CSSFilter.saturate(child: testWidget, value: 1.0);
-      
+
       expect(saturate1, testWidget);
 
       Widget saturate2 = CSSFilter.saturate(child: testWidget, value: -1.0);
@@ -246,7 +263,7 @@ void main() {
 
     test('CSSFilter.invert', () {
       Widget invert1 = CSSFilter.invert(child: testWidget, value: 0.0);
-      
+
       expect(invert1, testWidget);
 
       Widget invert2 = CSSFilter.invert(child: testWidget, value: -1.0);
@@ -260,7 +277,7 @@ void main() {
 
     test('CSSFilter.blur', () {
       Widget blur1 = CSSFilter.blur(child: testWidget, value: 0.0);
-      
+
       expect(blur1, testWidget);
 
       Widget blur2 = CSSFilter.blur(child: testWidget, value: -1.0);
@@ -274,7 +291,7 @@ void main() {
 
     test('CSSFilter.opacity', () {
       Widget opacity1 = CSSFilter.opacity(child: testWidget, value: 1.0);
-      
+
       expect(opacity1, testWidget);
 
       Widget opacity2 = CSSFilter.opacity(child: testWidget, value: -1.0);
@@ -288,49 +305,58 @@ void main() {
 
     test('CSSFilter.apply use default values', () {
       Widget origin = testWidget;
-      Widget apply1 = CSSFilter.apply(child: testWidget, value: CSSFilterMatrix());
+      Widget apply1 =
+          CSSFilter.apply(child: testWidget, value: CSSFilterMatrix());
 
       expect(origin.toString(), apply1.toString());
     });
-    
+
     test('CSSFilter.apply use independently', () {
       Widget contrast = CSSFilter.contrast(child: testWidget, value: 2.0);
-      Widget applyContrast = CSSFilter.apply(child: testWidget, value: CSSFilterMatrix().contrast(2.0));
+      Widget applyContrast = CSSFilter.apply(
+          child: testWidget, value: CSSFilterMatrix().contrast(2.0));
 
       expect(contrast.toString(), applyContrast.toString());
 
       Widget grayscale = CSSFilter.grayscale(child: testWidget, value: 1.0);
-      Widget applyGrayscale = CSSFilter.apply(child: testWidget, value: CSSFilterMatrix().grayscale(1.0));
+      Widget applyGrayscale = CSSFilter.apply(
+          child: testWidget, value: CSSFilterMatrix().grayscale(1.0));
 
       expect(grayscale.toString(), applyGrayscale.toString());
 
       Widget sepia = CSSFilter.sepia(child: testWidget, value: 1.0);
-      Widget applySepia = CSSFilter.apply(child: testWidget, value: CSSFilterMatrix().sepia(1.0));
+      Widget applySepia = CSSFilter.apply(
+          child: testWidget, value: CSSFilterMatrix().sepia(1.0));
 
       expect(sepia.toString(), applySepia.toString());
 
       Widget hueRotate = CSSFilter.hueRotate(child: testWidget, value: 90.0);
-      Widget applyHueRotate = CSSFilter.apply(child: testWidget, value: CSSFilterMatrix().hueRotate(90.0));
+      Widget applyHueRotate = CSSFilter.apply(
+          child: testWidget, value: CSSFilterMatrix().hueRotate(90.0));
 
       expect(hueRotate.toString(), applyHueRotate.toString());
 
       Widget brightness = CSSFilter.brightness(child: testWidget, value: 2.0);
-      Widget applyBrightness = CSSFilter.apply(child: testWidget, value: CSSFilterMatrix().brightness(2.0));
+      Widget applyBrightness = CSSFilter.apply(
+          child: testWidget, value: CSSFilterMatrix().brightness(2.0));
 
       expect(brightness.toString(), applyBrightness.toString());
 
       Widget saturate = CSSFilter.saturate(child: testWidget, value: 2.0);
-      Widget applySaturate = CSSFilter.apply(child: testWidget, value: CSSFilterMatrix().saturate(2.0));
+      Widget applySaturate = CSSFilter.apply(
+          child: testWidget, value: CSSFilterMatrix().saturate(2.0));
 
       expect(saturate.toString(), applySaturate.toString());
 
       Widget invert = CSSFilter.invert(child: testWidget, value: 1.0);
-      Widget applyInvert = CSSFilter.apply(child: testWidget, value: CSSFilterMatrix().invert(1.0));
+      Widget applyInvert = CSSFilter.apply(
+          child: testWidget, value: CSSFilterMatrix().invert(1.0));
 
       expect(invert.toString(), applyInvert.toString());
 
       Widget blur = CSSFilter.blur(child: testWidget, value: 1.0);
-      Widget applyBlur = CSSFilter.apply(child: testWidget, value: CSSFilterMatrix().blur(1.0));
+      Widget applyBlur = CSSFilter.apply(
+          child: testWidget, value: CSSFilterMatrix().blur(1.0));
 
       expect(blur.toString(), applyBlur.toString());
     });
@@ -338,11 +364,13 @@ void main() {
     test('CSSFilter.apply use in combination', () {
       Widget invert = CSSFilter.invert(child: testWidget, value: 1.0);
       Widget blurPlusInvert = CSSFilter.blur(child: invert, value: 1.0);
-      Widget applyBlur = CSSFilter.apply(child: invert, value: CSSFilterMatrix().blur(1.0));
+      Widget applyBlur =
+          CSSFilter.apply(child: invert, value: CSSFilterMatrix().blur(1.0));
 
       expect(blurPlusInvert.toString(), applyBlur.toString());
 
-      Widget applyBlurPlusInvert = CSSFilter.apply(child: testWidget, value: CSSFilterMatrix().invert(1.0).blur(1.0));
+      Widget applyBlurPlusInvert = CSSFilter.apply(
+          child: testWidget, value: CSSFilterMatrix().invert(1.0).blur(1.0));
 
       expect(blurPlusInvert.toString(), applyBlurPlusInvert.toString());
     });
@@ -456,7 +484,8 @@ void main() {
 
       expect(insNashville is ShaderMask, true);
 
-      Widget insNashvilleV2 = CSSFilterPresets.insNashvilleV2(child: testWidget);
+      Widget insNashvilleV2 =
+          CSSFilterPresets.insNashvilleV2(child: testWidget);
 
       expect(insNashvilleV2 is ShaderMask, true);
 
@@ -530,49 +559,66 @@ void main() {
     });
 
     test('CSSFilterPresets.apply use outliers', () {
-      Widget apply1 = CSSFilterPresets.apply(child: testWidget, value: CSSFilterPresets.ins1977, strength: 0.0);
+      Widget apply1 = CSSFilterPresets.apply(
+          child: testWidget, value: CSSFilterPresets.ins1977, strength: 0.0);
 
       expect(apply1, testWidget);
 
-      Widget apply2 = CSSFilterPresets.apply(child: testWidget, value: CSSFilterPresets.ins1977, strength: 0.5, alphaBlending: 2.0);
+      Widget apply2 = CSSFilterPresets.apply(
+          child: testWidget,
+          value: CSSFilterPresets.ins1977,
+          strength: 0.5,
+          alphaBlending: 2.0);
 
       expect(apply2 is Stack, true);
 
-      Widget apply3 = CSSFilterPresets.apply(child: testWidget, value: CSSFilterPresets.ins1977, strength: 0.5, alphaBlending: -1.0);
+      Widget apply3 = CSSFilterPresets.apply(
+          child: testWidget,
+          value: CSSFilterPresets.ins1977,
+          strength: 0.5,
+          alphaBlending: -1.0);
 
       expect(apply3 is Opacity, true);
 
-      Widget apply4 = CSSFilterPresets.apply(child: testWidget, value: CSSFilterPresets.ins1977V2, strength: 4.0);
+      Widget apply4 = CSSFilterPresets.apply(
+          child: testWidget, value: CSSFilterPresets.ins1977V2, strength: 4.0);
 
       expect(apply4 is ColorFiltered, true);
     });
 
     test('CSSFilterPresets.apply base usage', () {
       Widget origin = CSSFilterPresets.ins1977V2(child: testWidget);
-      Widget apply1 = CSSFilterPresets.apply(child: testWidget, value: CSSFilterPresets.ins1977V2);
+      Widget apply1 = CSSFilterPresets.apply(
+          child: testWidget, value: CSSFilterPresets.ins1977V2);
 
       expect(origin.toString(), apply1.toString());
     });
 
     test('CSSFilterPresets.apply use strength', () {
-      Widget apply1 = CSSFilterPresets.apply(child: testWidget, value: CSSFilterPresets.ins1977V2, strength: 0.6);
+      Widget apply1 = CSSFilterPresets.apply(
+          child: testWidget, value: CSSFilterPresets.ins1977V2, strength: 0.6);
 
       expect(apply1 is Stack, true);
     });
 
     test('CSSFilterPresets.apply use alphaBlending', () {
-      Widget apply1 = CSSFilterPresets.apply(child: testWidget, value: CSSFilterPresets.ins1977, strength: 0.5, alphaBlending: 0.5);
+      Widget apply1 = CSSFilterPresets.apply(
+          child: testWidget,
+          value: CSSFilterPresets.ins1977,
+          strength: 0.5,
+          alphaBlending: 0.5);
 
       expect(apply1 is Opacity, true);
     });
 
     test('CSSFilterPresets.apply use customPreset', () {
-      Widget apply1 = CSSFilterPresets.apply(child: testWidget, value: ({ required Widget child }) {
-        return CSSFilter.apply(
-          child: child, 
-          value: CSSFilterMatrix().sepia(0.2).saturate(1.4)
-        );
-      });
+      Widget apply1 = CSSFilterPresets.apply(
+          child: testWidget,
+          value: ({required Widget child}) {
+            return CSSFilter.apply(
+                child: child,
+                value: CSSFilterMatrix().sepia(0.2).saturate(1.4));
+          });
 
       expect(apply1 is ColorFiltered, true);
     });

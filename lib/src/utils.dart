@@ -2,11 +2,31 @@ import 'package:flutter/material.dart';
 
 List<double> baseMatrix() {
   return <double>[
-    1,0,0,0,0,
-    0,1,0,0,0,
-    0,0,1,0,0,
-    0,0,0,1,0,
-    0,0,0,0,1
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
   ];
 }
 
@@ -121,40 +141,40 @@ bool isNotDefault(double v) {
 execShaderDirectSample(Color color, [Alignment end = Alignment.centerRight]) {
   return (Rect bounds) {
     return LinearGradient(
-      end: end,
-      colors: [color, color],
-      stops: const [0.0, 1.0]
-    ).createShader(bounds);
+        end: end,
+        colors: [color, color],
+        stops: const [0.0, 1.0]).createShader(bounds);
   };
 }
 
-execShaderLinearSample(List<Color> colors, [Alignment end = Alignment.centerRight, List<double> stops = const [0.0, 1.0]]) {
+execShaderLinearSample(List<Color> colors,
+    [Alignment end = Alignment.centerRight,
+    List<double> stops = const [0.0, 1.0]]) {
   return (Rect bounds) {
-    return LinearGradient(
-      end: end,
-      colors: colors,
-      stops: stops
-    ).createShader(bounds);
+    return LinearGradient(end: end, colors: colors, stops: stops)
+        .createShader(bounds);
   };
 }
 
-execShaderRadialSample(List<Color> colors, [List<double> stops = const [0.0, 1.0], radius = 0.8]) {
+execShaderRadialSample(List<Color> colors,
+    [List<double> stops = const [0.0, 1.0], radius = 0.8]) {
   return (Rect bounds) {
     return RadialGradient(
-      center: Alignment.center,
-      radius: radius,
-      colors: colors,
-      stops: stops
-      // tileMode: TileMode.mirror,
-    ).createShader(bounds);
+            center: Alignment.center,
+            radius: radius,
+            colors: colors,
+            stops: stops
+            // tileMode: TileMode.mirror,
+            )
+        .createShader(bounds);
   };
 }
 
 /// Generates the configuration for applying CSSFilter effects, which is provided to `CSSFilter.apply` for use.
 /// Supports chain calls.
-/// 
+///
 /// Example:
-/// 
+///
 /// ```dart
 /// CSSFilter.apply(
 ///   child: const Text('Hello World!'),
@@ -167,34 +187,42 @@ class CSSFilterMatrix {
     conf['contrast'] = value;
     return this;
   }
+
   grayscale([double value = 0.0]) {
     conf['grayscale'] = value;
     return this;
   }
+
   sepia([double value = 0.0]) {
     conf['sepia'] = value;
     return this;
   }
+
   hueRotate([double value = 0.0]) {
     conf['hueRotate'] = value;
     return this;
   }
+
   brightness([double value = 1.0]) {
     conf['brightness'] = value;
     return this;
   }
+
   saturate([double value = 1.0]) {
     conf['saturate'] = value;
     return this;
   }
+
   invert([double value = 0.0]) {
     conf['invert'] = value;
     return this;
   }
+
   blur([double value = 0.0]) {
     conf['blur'] = value;
     return this;
   }
+
   opacity([double value = 1.0]) {
     conf['opacity'] = value;
     return this;

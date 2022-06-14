@@ -1,6 +1,6 @@
 name: css_filter
-description: CSS filter for flutter
-version: 1.0.0
+description: Apply various filter effects in a CSS-like way in flutter, can be used on any widget, not just images, support custom filters and control filter intensity.
+version: 1.0.1
 homepage: https://github.com/iofod/flutter_css_filter
 
 environment:

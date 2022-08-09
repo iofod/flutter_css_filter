@@ -30,3 +30,7 @@
 
 * add i18n docs.
 * format code.
+
+## 1.0.2
+
+* fix CSSFilter.blur()

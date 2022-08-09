@@ -108,7 +108,7 @@ class CSSFilter {
     if (!isNotNegative(value)) return child;
 
     return ImageFiltered(
-        imageFilter: ImageFilter.blur(sigmaX: value, sigmaY: value),
+        imageFilter: ImageFilter.blur(sigmaX: value, sigmaY: value, tileMode: TileMode.decal),
         child: child);
   }
 

@@ -183,47 +183,47 @@ execShaderRadialSample(List<Color> colors,
 /// ```
 class CSSFilterMatrix {
   Map conf = {};
-  contrast([double value = 1.0]) {
+  CSSFilterMatrix contrast([double value = 1.0]) {
     conf['contrast'] = value;
     return this;
   }
 
-  grayscale([double value = 0.0]) {
+  CSSFilterMatrix grayscale([double value = 0.0]) {
     conf['grayscale'] = value;
     return this;
   }
 
-  sepia([double value = 0.0]) {
+  CSSFilterMatrix sepia([double value = 0.0]) {
     conf['sepia'] = value;
     return this;
   }
 
-  hueRotate([double value = 0.0]) {
+  CSSFilterMatrix hueRotate([double value = 0.0]) {
     conf['hueRotate'] = value;
     return this;
   }
 
-  brightness([double value = 1.0]) {
+  CSSFilterMatrix brightness([double value = 1.0]) {
     conf['brightness'] = value;
     return this;
   }
 
-  saturate([double value = 1.0]) {
+  CSSFilterMatrix saturate([double value = 1.0]) {
     conf['saturate'] = value;
     return this;
   }
 
-  invert([double value = 0.0]) {
+  CSSFilterMatrix invert([double value = 0.0]) {
     conf['invert'] = value;
     return this;
   }
 
-  blur([double value = 0.0]) {
+  CSSFilterMatrix blur([double value = 0.0]) {
     conf['blur'] = value;
     return this;
   }
 
-  opacity([double value = 1.0]) {
+  CSSFilterMatrix opacity([double value = 1.0]) {
     conf['opacity'] = value;
     return this;
   }

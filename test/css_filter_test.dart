@@ -85,21 +85,6 @@ void main() {
       expect(eg.conf['contrast'], 1.0);
     });
 
-    test('CSSFilterMatrix this', () {
-      final eg = CSSFilterMatrix()
-          .contrast()
-          .grayscale()
-          .sepia()
-          .hueRotate()
-          .brightness()
-          .saturate()
-          .invert()
-          .blur()
-          .opacity();
-
-      expect(eg is CSSFilterMatrix, true);
-    });
-
     test('CSSFilterMatrix chain calls', () {
       final eg = CSSFilterMatrix().contrast(1.0).grayscale(1.0);
 

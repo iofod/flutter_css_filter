@@ -34,3 +34,7 @@
 ## 1.0.2
 
 * fix CSSFilter.blur()
+
+## 1.0.3
+
+* fix CSSFilterMatrix
